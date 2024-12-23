@@ -71,7 +71,7 @@ class WeareteamAI:
                     valid_moves.append((row, col))
         return valid_moves
 
-    def make_move(self, row, col, player):
+    def place(self, row, col, player):
         self.board[row][col] = player
         opponent = '●' if player == '○' else '○'
         directions = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]
@@ -124,7 +124,7 @@ class WeareteamAI:
         for move in valid_moves:
             row, col = move
             temp_board = [row[:] for row in self.board]
-            self.make_move(row, col, player)
+            self.place(row, col, player)
             score = self.evaluate_board(player)
             if score > best_score:
                 best_score = score
@@ -163,14 +163,14 @@ class WeareteamAI:
                         row = int(move[1]) - 1
 
                         if (row, col) in valid_moves:
-                            self.make_move(row, col, current_player)
+                            self.place(row, col, current_player)
                             break
                     print("無効な手です。もう一度入力してください。")
             else:
                 print("AIが手を考えています...")
                 move = self.ai_move(current_player)
                 if move:
-                    self.make_move(move[0], move[1], current_player)
+                    self.place(move[0], move[1], current_player)
                     print(f"AIが置いた位置：{chr(move[1] + ord('a'))}{move[0] + 1}")
 
             current_player = '○' if current_player == '●' else '●'
