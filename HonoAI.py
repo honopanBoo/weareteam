@@ -158,7 +158,7 @@ def evaluate_future(board, stone, depth, alpha=-math.inf, beta=math.inf):
                     return alpha  # 枝刈り
     return alpha
 
-def improved_place(board, stone):
+def random_place(board, stone):
     best_score = -math.inf
     best_move = None
 
@@ -179,7 +179,7 @@ class HonoAI(object):
         return "🐼"
 
     def place(self, board, stone):
-        x, y = improved_place(board, stone)
+        x, y = random_place(board, stone)
         if x == -1 and y == -1:
             print("No valid moves available.")
         return x, y
