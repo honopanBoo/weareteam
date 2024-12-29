@@ -158,7 +158,7 @@ def improved_place(board, stone):
     return best_move
 
 
-class PandaAI(object):
+class honoAI(object):
 
     def face(self):
         return "🐼"
