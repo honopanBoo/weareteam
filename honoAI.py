@@ -1,5 +1,5 @@
-from kogi_canvas import play_othello, PandaAI
-from kogi_canvas import Canvas
+
+
 import math
 import random
 
