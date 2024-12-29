@@ -123,9 +123,9 @@ def evaluate_board(board, stone, game_stage):
             count_stones(board, stone) * 5
         )
 
-def evaluate_future(board, stone, depth):
+def evaluate_future(board, stone, depth, alpha=-math.inf, beta=math.inf):
     if depth == 0:
-        return evaluate_board(board, stone)
+        return evaluate_board(board, stone, "late")  # 適切な game_stage を指定
 
     opponent = 3 - stone
     for y in range(len(board)):
@@ -136,9 +136,8 @@ def evaluate_future(board, stone, depth):
                 if score > alpha:
                     alpha = score
                 if alpha >= beta:
-                    break  # 枝刈り
+                    return alpha  # 枝刈り
     return alpha
-
 
 def improved_place(board, stone):
     best_score = -math.inf
@@ -162,5 +161,5 @@ class HonoAI(object):
         return "🐼"
 
     def place(self, board, stone):
-        x, y = random_place(board, stone)
+        x, y = improved_place(board, stone)
         return x, y
