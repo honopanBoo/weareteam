@@ -55,8 +55,27 @@ def can_place(board, stone):
 
 def simulate_board(board, stone, x, y):
     new_board = [row[:] for row in board]
+    opponent = 3 - stone
+    directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+
     new_board[y][x] = stone
-    # 実際に石を裏返すロジックを追加
+    for dx, dy in directions:
+        nx, ny = x + dx, y + dy
+        flip_positions = []
+
+        while 0 <= nx < len(board[0]) and 0 <= ny < len(board):
+            if new_board[ny][nx] == opponent:
+                flip_positions.append((nx, ny))
+            elif new_board[ny][nx] == stone:
+                for fx, fy in flip_positions:
+                    new_board[fy][fx] = stone
+                break
+            else:
+                break
+
+            nx += dx
+            ny += dy
+
     return new_board
 
 SCORE_MAP = [
@@ -152,8 +171,7 @@ def improved_place(board, stone):
                     best_score = score
                     best_move = (x, y)
 
-    return best_move
-
+    return best_move if best_move is not None else (-1, -1)
 
 class HonoAI(object):
 
@@ -162,4 +180,6 @@ class HonoAI(object):
 
     def place(self, board, stone):
         x, y = improved_place(board, stone)
+        if x == -1 and y == -1:
+            print("No valid moves available.")
         return x, y
