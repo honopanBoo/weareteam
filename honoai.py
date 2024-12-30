@@ -170,7 +170,7 @@ def improved_place(board, stone):
 class HonoAI(object):
 
     def face(self):
-        return "🐼"
+        return "🐺"
 
     def place(self, board, stone):
         # 石を置ける場所がない場合はpass
