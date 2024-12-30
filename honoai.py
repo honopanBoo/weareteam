@@ -14,13 +14,6 @@ board = [
 ]
 
 def can_place_x_y(board, stone, x, y):
-    """
-    石を置けるかどうかを調べる関数。
-    board: 2次元配列のオセロボード
-    x, y: 石を置きたい座標 (0-indexed)
-    stone: 現在のプレイヤーの石 (1: 黒, 2: 白)
-    return: 置けるなら True, 置けないなら False
-    """
     if board[y][x] != 0:
         return False  # 既に石がある場合は置けない
 
@@ -40,6 +33,7 @@ def can_place_x_y(board, stone, x, y):
             return True  # 石を置ける条件を満たす
 
     return False
+
 
 def can_place(board, stone):
     """
@@ -171,7 +165,7 @@ def improved_place(board, stone):
                     best_score = score
                     best_move = (x, y)
 
-    return best_move if best_move is not None else (-1, -1)
+    return best_move if best_move is not None and best_move != (-1, -1) else (-1, -1)
 
 class HonoAI(object):
 
@@ -179,7 +173,10 @@ class HonoAI(object):
         return "🐼"
 
     def place(self, board, stone):
+        # 石を置ける場所がない場合はpass
+        if not can_place(board, stone):
+            print("No valid moves available. Passing turn.")
+            return  # 値を返さずに終了
+
         x, y = improved_place(board, stone)
-        if x == -1 and y == -1:
-            print("No valid moves available.")
         return x, y
