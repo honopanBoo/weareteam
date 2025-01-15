@@ -176,7 +176,7 @@ class OokamiAI(object):
         # 石を置ける場所がない場合はpass
         if not can_place(board, stone):
             print("No valid moves available. Passing turn.")
-            return  # 値を返さずに終了
+            return None  # 値を返さずに終了
 
-        x, y = improved_place(board, stone)
-        return x, y
+        move = improved_place(board, stone)
+        return move
