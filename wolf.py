@@ -176,12 +176,7 @@ class WolfAI(object):
         # 石を置ける場所がない場合はpass
         if not can_place(board, stone):
             print("No valid moves available. Passing turn.")
-            return None  # 値を返さずに終了
+            return  # 値を返さずに終了
 
-        move = improved_place(board, stone)
-        if move is None:  # 念のため None を確認
-            print("No valid move found. Passing turn.")
-            return None
-
-        x, y = move
+        x, y = improved_place(board, stone)
         return x, y
