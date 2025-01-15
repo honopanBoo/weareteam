@@ -167,7 +167,7 @@ def improved_place(board, stone):
 
     return best_move if best_move is not None and best_move != (-1, -1) else (-1, -1)
 
-class HonoAI(object):
+class OokamiAI(object):
 
     def face(self):
         return "🐺"
