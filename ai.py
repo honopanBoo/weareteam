@@ -165,7 +165,7 @@ def improved_place(board, stone):
                     best_score = score
                     best_move = (x, y)
 
-    return best_move if best_move is not None and best_move != (-1, -1) else (-1, -1)
+    return best_move #if best_move is not None and best_move != (-1, -1) else (-1, -1)
 
 class OokamiAI(object):
 
