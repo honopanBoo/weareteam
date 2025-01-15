@@ -167,7 +167,7 @@ def improved_place(board, stone):
 
     return best_move #if best_move is not None and best_move != (-1, -1) else (-1, -1)
 
-class OokamiAI(object):
+class WolfAI(object):
 
     def face(self):
         return "🐺"
@@ -179,4 +179,9 @@ class OokamiAI(object):
             return None  # 値を返さずに終了
 
         move = improved_place(board, stone)
-        return move
+        if move is None:  # 念のため None を確認
+            print("No valid move found. Passing turn.")
+            return None
+
+        x, y = move
+        return x, y
